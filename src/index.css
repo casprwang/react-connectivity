@@ -1,0 +1,34 @@
+.banner::before {
+  content: attr(data-conn);
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8vh;
+  min-height: 50px;
+  line-height: 100%;
+  vertical-align: middle;
+  font-size: 1.5em;
+  max-height: 90px;
+  opacity: 0;
+  background: red;
+  transition: all .2s ease-in;
+  /* centering */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner.banner-reconnect::before {
+  background: lightgreen;
+  color: white;
+  opacity: .8;
+}
+
+.banner.banner-disconnect::before {
+  background: red;
+  color: white;
+  opacity: .8;
+}
