@@ -9,7 +9,7 @@ import './index.css';
 const timer$ = timer(0, 3000)
 const getCheckReachable$ = url => from(isReachable(url)).pipe(
   timeout(2500),
-  catchError(() => false),
+  catchError(() => of(false)),
 )
 
 const poll$ = timer$.pipe(
