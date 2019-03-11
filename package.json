@@ -1,6 +1,6 @@
 {
   "name": "react-connectivity",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "wrap your components with network checks",
   "main": "index.js",
   "scripts": {
