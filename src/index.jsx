@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { timer, from, merge } from 'rxjs';
-import { map, delay, mapTo, filter, distinctUntilChanged, catchError, switchMap, timeout, pairwise } from 'rxjs/operators';
+import { timer, from } from 'rxjs';
+import { map, catchError, switchMap, timeout, pairwise } from 'rxjs/operators';
 import isReachable from 'is-reachable'
 
 import './index.css';
@@ -12,61 +12,36 @@ const getCheckReachable$ = url => from(isReachable(url)).pipe(
   catchError(() => false),
 )
 
-const ping$ = timer$.pipe(
+const poll$ = timer$.pipe(
   switchMap(() => getCheckReachable$('google.com')),
 )
-const pingLazy$ = ping$.pipe(
-  distinctUntilChanged()
-)
 
-const falseToTrueFilterer = ([last, curr]) => {
-  if (!last && curr) return true
-  return false
+const classNameMapper = ([last, curr]) => {
+  if (!last && curr) return 'banner banner-reconnect'
+  if (last && curr) return 'banner'
+  return 'banner banner-disconnect'
 }
 
-const reconnect$ = pingLazy$.pipe(
+const className$ = poll$.pipe(
   pairwise(),
-  filter(falseToTrueFilterer),
-)
-
-const hideAfterDelay$ = reconnect$.pipe(
-  delay(1000),
-)
-
-const failedPing$ = ping$.pipe(
-  filter(x => !x)
-)
-
-const className$ = merge(
-  reconnect$.pipe(mapTo('banner banner-reconnect')),
-  hideAfterDelay$.pipe(mapTo('banner')),
-  failedPing$.pipe(mapTo('banner banner-disconnect'))
-)
-
-
-const classNameToMsgMapper = className => {
-  if (className === 'banner banner-reconnect') {
-    return 'reconnected'
-  } else if (className === 'banner banner-disconnect') {
-    return 'disconnected'
-  } else {
-    return ''
-  }
-}
-const msg$ = className$.pipe(
-  map(classNameToMsgMapper)
+  map(classNameMapper),
 )
 
 export default ({ children }) => {
-  const [msg, setMsg] = useState(true)
+  const [msg, setMsg] = useState('')
   const [className, setClassName] = useState('banner')
 
+  const observer = n => {
+    setClassName(n)
+    if (n === 'banner banner-reconnect') setMsg('reconnected')
+    else if (n === 'banner banner-disconnect') setMsg('disconnected')
+    else setMsg('')
+  }
+
   useEffect(() => {
-    const classNameSub = className$.subscribe(setClassName)
-    const contentSub = msg$.subscribe(setMsg)
+    const classNameSub = className$.subscribe(observer)
     return () => {
       classNameSub.unsubscribe()
-      contentSub.unsubscribe()
     }
   })
 

@@ -4,6 +4,7 @@
   "description": "wrap your components with network checks",
   "main": "index.js",
   "scripts": {
+    "build": "./node_modules/.bin/babel src -d lib --copy-files",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/wangsongiam/react-connectivity/issues"
   },
-  "homepage": "https://github.com/wangsongiam/react-connectivity#readme"
+  "homepage": "https://github.com/wangsongiam/react-connectivity#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0"
+  },
+  "dependencies": {}
 }
