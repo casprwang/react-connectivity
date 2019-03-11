@@ -23,5 +23,8 @@
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "is-reachable": "^3.0.0",
+    "rxjs": "^6.4.0"
+  }
 }
