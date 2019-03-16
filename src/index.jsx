@@ -19,12 +19,12 @@ const poll$ = timer$.pipe(
 );
 
 const classNameMapper = ([last, curr]) => {
-  if (!last && curr) return 'banner banner-reconnect';
-  if (last && curr) return 'banner';
-  return 'banner banner-disconnect';
+  if (!last && curr) return 'reconnected';
+  if (last && curr) return 'connected';
+  return 'disconnected';
 };
 
-const className$ = poll$.pipe(
+export const connectivity$ = poll$.pipe(
   pairwise(),
   map(classNameMapper),
 );
@@ -34,14 +34,21 @@ const Main = ({ children }) => {
   const [className, setClassName] = useState('banner');
 
   const observer = n => {
-    setClassName(n);
-    if (n === 'banner banner-reconnect') setMsg('reconnected');
-    else if (n === 'banner banner-disconnect') setMsg('disconnected');
-    else setMsg('');
+    if (n === 'reconnected') {
+      setClassName('banner banner-reconnect');
+      setMsg('reconnected');
+    }
+    else if (n === 'disconnected') {
+      setClassName('banner banner-disconnect');
+      setMsg('disconnected');
+    } else {
+      setClassName('banner');
+      setMsg('');
+    }
   };
 
   useEffect(() => {
-    const classNameSub = className$.subscribe(observer);
+    const classNameSub = connectivity$.subscribe(observer);
     return () => {
       classNameSub.unsubscribe();
     };
