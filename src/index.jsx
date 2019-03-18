@@ -8,31 +8,28 @@ import isReachable from 'is-reachable';
 import './index.css';
 
 
-const timer$ = timer(0, 3000);
 const getCheckReachable$ = url => from(isReachable(url)).pipe(
   timeout(2500),
   catchError(() => of(false)),
 );
 
-const poll$ = timer$.pipe(
-  switchMap(() => getCheckReachable$('google.com')),
-);
 
-const classNameMapper = ([last, curr]) => {
-  if (!last && curr) return 'reconnected';
-  if (last && curr) return 'connected';
-  return 'disconnected';
-};
-
-export const connectivity$ = poll$.pipe(
+const getConnectivity$ = (url, delayTime) => timer(0, delayTime).pipe(
+  switchMap(() => getCheckReachable$(url)),
   pairwise(),
-  map(classNameMapper),
+  map(([last, curr]) => {
+    if (!last && curr) return 'reconnected';
+    if (last && curr) return 'connected';
+    return 'disconnected';
+  }),
 );
 
-const Main = ({ children }) => {
+
+const Connectivity = ({ children, url='google.com', interval=3000 }) => {
   const [msg, setMsg] = useState('');
   const [className, setClassName] = useState('banner');
 
+  const connectivity$ = getConnectivity$(url, interval);
   const observer = n => {
     if (n === 'reconnected') {
       setClassName('banner banner-reconnect');
@@ -63,9 +60,9 @@ const Main = ({ children }) => {
 };
 
 
-Main.propTypes = {
+Connectivity.propTypes = {
   children: PropTypes.element
 };
 
 
-export default Main;
+export default Connectivity;

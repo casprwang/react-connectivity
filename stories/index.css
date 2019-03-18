@@ -1,5 +1,18 @@
-.wrapper {
+.wrapper-basic {
   height: 300px;
   width: 300px;
   background: lightblue;
 }
+
+.wrapper-large {
+  height: 900px;
+  width: 900px;
+  background: lightblue;
+}
+
+.wrapper-small {
+  height: 200px;
+  width: 200px;
+  background: lightblue;
+}
+

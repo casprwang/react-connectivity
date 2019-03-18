@@ -3,14 +3,28 @@ import { storiesOf } from '@storybook/react';
 
 import Connectivity from '../src/index.jsx';
 
-import './index.css'
+import './index.css';
 
 
-storiesOf('Button', module)
-  .add('with text', () => (
-    <div className="wrapper">
+storiesOf('Basic', module)
+  .add('with basic wrapper', () => (
+    <div className="wrapper-basic">
       <Connectivity>
-        <h1>Hello</h1>
+        <h1>I am wrapped with react-connectivity, try go offline</h1>
+      </Connectivity>
+    </div>
+  ))
+  .add('with large wrapper', () => (
+    <div className="wrapper-large">
+      <Connectivity>
+        <h1>I am wrapped with react-connectivity, try go offline</h1>
+      </Connectivity>
+    </div>
+  ))
+  .add('with small wrapper', () => (
+    <div className="wrapper-small">
+      <Connectivity>
+        <h1>I am wrapped with react-connectivity, try go offline</h1>
       </Connectivity>
     </div>
   ))
