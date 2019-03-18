@@ -1,11 +1,12 @@
 {
   "name": "react-connectivity",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "description": "wrap your components with network checks",
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint --ext .js --ext .jsx src",
     "lint:fix": "./node_modules/.bin/eslint --ext .js --ext .jsx src --fix",
+    "prebuild": "rimraf ./lib",
     "build": "./node_modules/.bin/babel src -d lib --copy-files",
     "storybook": "start-storybook",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,6 +32,7 @@
     "eslint": "^5.15.1",
     "eslint-plugin-react": "^7.12.4",
     "react-dom": "^16.8.4",
+    "rimraf": "^2.6.3",
     "style-loader": "^0.23.1"
   },
   "dependencies": {
