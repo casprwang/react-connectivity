@@ -4,18 +4,31 @@ import { timer, from, of } from 'rxjs';
 import { map, catchError, switchMap, timeout, pairwise } from 'rxjs/operators';
 import isReachable from 'is-reachable';
 
-
 import './index.css';
 
 
-const getCheckReachable$ = url => from(isReachable(url)).pipe(
-  timeout(2500),
+/**
+ * 
+ * @param { String } url 
+ * @param { Number } timeoutTime 
+ * 
+ * @return { Observable }
+ */
+const getCheckReachable$ = (url, timeoutTime) => from(isReachable(url)).pipe(
+  timeout(timeoutTime),
   catchError(() => of(false)),
 );
 
 
+/**
+ * 
+ * @param { String } url 
+ * @param { Number } delayTime 
+ * 
+ * @return { Observable }
+ */
 const getConnectivity$ = (url, delayTime) => timer(0, delayTime).pipe(
-  switchMap(() => getCheckReachable$(url)),
+  switchMap(() => getCheckReachable$(url, delayTime)),
   pairwise(),
   map(([last, curr]) => {
     if (!last && curr) return 'reconnected';
@@ -25,7 +38,7 @@ const getConnectivity$ = (url, delayTime) => timer(0, delayTime).pipe(
 );
 
 
-const Connectivity = ({ children, url='google.com', interval=3000 }) => {
+const Connectivity = ({ children, url = 'google.com', interval = 3000 }) => {
   const [msg, setMsg] = useState('');
   const [className, setClassName] = useState('banner');
 
@@ -61,7 +74,9 @@ const Connectivity = ({ children, url='google.com', interval=3000 }) => {
 
 
 Connectivity.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
+  url: PropTypes.String,
+  interval: PropTypes.Number
 };
 
 

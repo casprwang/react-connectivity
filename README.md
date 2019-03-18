@@ -31,6 +31,8 @@ For component logics, I used hooks. It looks simpler.
 
 Currently using plain CSS, while it might be better to use CSS-in-JS for exposing more sytling apis.
 
+The banner styles are quite simple, with a few words for its status.
+
 
 ### Testing?
 
