@@ -7,6 +7,7 @@
     "lint": "./node_modules/.bin/eslint --ext .js --ext .jsx src",
     "lint:fix": "./node_modules/.bin/eslint --ext .js --ext .jsx src --fix",
     "build": "./node_modules/.bin/babel src -d lib --copy-files",
+    "storybook": "start-storybook",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,12 +25,18 @@
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/react": "^5.0.2",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.1",
     "eslint": "^5.15.1",
-    "eslint-plugin-react": "^7.12.4"
+    "eslint-plugin-react": "^7.12.4",
+    "react-dom": "^16.8.4",
+    "style-loader": "^0.23.1"
   },
   "dependencies": {
     "is-reachable": "^3.0.0",
     "prop-types": "^15.7.2",
+    "react": "^16.8.4",
     "rxjs": "^6.4.0"
   }
 }

@@ -1,3 +1,7 @@
+.banner {
+  position: relative;
+}
+
 .banner::before {
   content: attr(data-conn);
   text-align: center;
