@@ -9,6 +9,7 @@
     "prebuild": "rimraf ./lib",
     "build": "./node_modules/.bin/babel src -d lib --copy-files",
     "storybook": "start-storybook",
+    "build-storybook": "build-storybook -c .storybook -o .out",
     "test": "./node_modules/.bin/jest"
   },
   "repository": {

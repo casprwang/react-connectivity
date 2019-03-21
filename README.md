@@ -1,5 +1,6 @@
 # react-connectivity
 
+[![Build Status](https://travis-ci.com/wangsongiam/react-connectivity.svg?token=YfFsXUqpWyjibv8mNnVs&branch=master)](https://travis-ci.com/wangsongiam/react-connectivity)
 [![npm version](http://img.shields.io/npm/v/react-connectivity.svg?style=flat)](https://npmjs.org/package/react-connectivity "View this project on npm")
 
 A react component wrapper for connection checks.
@@ -17,27 +18,29 @@ From which I need indicators for connection failures and reconnections.
 yarn add react-connectivity
 ```
 
+```js
+<div className="your wrapper">
+  <Connectivity url="endpoint" interval=3000 />
+  ...
+</div>
+```
+
 ## Design
 
 open for discussion.
 
 ### Pattern?
 
-For polling, I chose Observable pattern for mainly three reasons: tired of mutating states; testing; a desire to play more Observables.
-
-For component logics, I used hooks. It looks simpler.
+Observable pattern polling; hooks for component side effects.
 
 ### Styling?
 
-Currently using plain CSS, while it might be better to use CSS-in-JS for exposing more sytling apis.
-
-The banner styles are quite simple, with a few words for its status.
+Currently using plain CSS, plan to migrate to CSS-in-JS for exposing more sytling apis.
 
 
 ### Testing?
 
-Just unit tests for Observables.
-
+Basic unit test for component, will test Observables if necessary.
 
 ## Caveats
 
