@@ -1,34 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { timer, from, of } from 'rxjs';
-import { map, catchError, switchMap, timeout, pairwise } from 'rxjs/operators';
+import { map, catchError, switchMapTo, timeout, pairwise } from 'rxjs/operators';
 import isReachable from 'is-reachable';
 
 import './index.css';
 
 
-/**
- * 
- * @param { String } url 
- * @param { Number } timeoutTime 
- * 
- * @return { Observable }
- */
+// cold
 const getCheckReachable$ = (url, timeoutTime) => from(isReachable(url)).pipe(
   timeout(timeoutTime),
   catchError(() => of(false)),
 );
 
 
-/**
- * 
- * @param { String } url 
- * @param { Number } delayTime 
- * 
- * @return { Observable }
- */
+// cold
 const getConnectivity$ = (url, delayTime) => timer(0, delayTime).pipe(
-  switchMap(() => getCheckReachable$(url, delayTime)),
+  switchMapTo(getCheckReachable$(url, delayTime)),
   pairwise(),
   map(([last, curr]) => {
     if (!last && curr) return 'reconnected';
@@ -38,7 +26,7 @@ const getConnectivity$ = (url, delayTime) => timer(0, delayTime).pipe(
 );
 
 
-const Connectivity = ({ children, url = 'google.com', interval = 3000 }) => {
+const Connectivity = ({ url = 'google.com', interval = 3000 }) => {
   const [msg, setMsg] = useState('');
   const [className, setClassName] = useState('banner');
 
@@ -47,8 +35,7 @@ const Connectivity = ({ children, url = 'google.com', interval = 3000 }) => {
     if (n === 'reconnected') {
       setClassName('banner banner-reconnect');
       setMsg('reconnected');
-    }
-    else if (n === 'disconnected') {
+    } else if (n === 'disconnected') {
       setClassName('banner banner-disconnect');
       setMsg('disconnected');
     } else {
@@ -65,18 +52,14 @@ const Connectivity = ({ children, url = 'google.com', interval = 3000 }) => {
   });
 
   return (
-    <>
-      <div className={className} data-conn={msg}></div>
-      {children}
-    </>
+    <div className={className} data-conn={msg}></div>
   );
 };
 
 
 Connectivity.propTypes = {
-  children: PropTypes.element,
-  url: PropTypes.String,
-  interval: PropTypes.Number
+  url: PropTypes.string,
+  interval: PropTypes.number
 };
 
 
