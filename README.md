@@ -19,8 +19,10 @@ yarn add react-connectivity
 ```
 
 ```js
+import Connectivity from 'react-connectivity'
+
 <div className="your wrapper">
-  <Connectivity url="endpoint" interval=3000 />
+  <Connectivity url="your endpoint" interval=3000 />
   ...
 </div>
 ```
@@ -40,11 +42,11 @@ Currently using plain CSS, plan to migrate to CSS-in-JS for exposing more sytlin
 
 ### Testing?
 
-Basic unit test for component, will test Observables if necessary.
+Basic unit test for component, plan to test Observables.
 
 ## Caveats
 
-* With default 3s Slow 3G network might be treated as 
+* With default timeout by 3 seconds, slower-than-3G network might be treated as disconnected.
 
 
 ## Related
