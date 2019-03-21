@@ -37,8 +37,9 @@ Observable pattern polling; hooks for component side effects.
 
 ### Styling?
 
-Currently using plain CSS, plan to migrate to CSS-in-JS for exposing more sytling apis.
+The component will add a overlay relative to the outer element.
 
+Currently using plain CSS, plan to migrate to CSS-in-JS for exposing more sytling apis.
 
 ### Testing?
 
