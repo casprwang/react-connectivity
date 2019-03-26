@@ -38,6 +38,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.5.0",
     "react-dom": "^16.8.4",
+    "react-grid-layout": "^0.16.6",
     "rimraf": "^2.6.3",
     "style-loader": "^0.23.1"
   },
