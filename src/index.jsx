@@ -19,9 +19,9 @@ const getConnectivity$ = (url, delayTime) => timer(0, delayTime).pipe(
   switchMapTo(getCheckReachable$(url, delayTime)),
   pairwise(),
   map(([last, curr]) => {
-    if (!last && curr) return 'reconnected';
-    if (last && curr) return 'connected';
-    return 'disconnected';
+    if (!last && curr) return 'RC-reconnected';
+    if (last && curr) return 'RC-connected';
+    return 'RC-disconnected';
   }),
 );
 
@@ -32,14 +32,14 @@ const Connectivity = ({ url = 'google.com', interval = 3000 }) => {
 
   const connectivity$ = getConnectivity$(url, interval);
   const observer = n => {
-    if (n === 'reconnected') {
-      setClassName('banner banner-reconnect');
-      setMsg('reconnected');
-    } else if (n === 'disconnected') {
-      setClassName('banner banner-disconnect');
-      setMsg('disconnected');
+    if (n === 'RC-reconnected') {
+      setClassName('RC-banner RC-banner-reconnect');
+      setMsg('RC-reconnected');
+    } else if (n === 'RC-disconnected') {
+      setClassName('RC-banner RC-banner-disconnect');
+      setMsg('RC-disconnected');
     } else {
-      setClassName('banner');
+      setClassName('RC-banner');
       setMsg('');
     }
   };

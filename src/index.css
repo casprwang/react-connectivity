@@ -1,8 +1,8 @@
-.banner {
+.RC-banner {
   position: relative;
 }
 
-.banner::before {
+.RC-banner::before {
   content: attr(data-conn);
   text-align: center;
   position: absolute;
@@ -25,13 +25,13 @@
   justify-content: center;
 }
 
-.banner.banner-reconnect::before {
+.RC-banner.RC-banner-reconnect::before {
   background: lightgreen;
   color: white;
   opacity: .8;
 }
 
-.banner.banner-disconnect::before {
+.RC-banner.RC-banner-disconnect::before {
   background: red;
   color: white;
   opacity: .8;
