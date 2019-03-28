@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { timer, from, of } from 'rxjs';
-import { map, catchError, switchMapTo, timeout, pairwise } from 'rxjs/operators';
+import { map, catchError, switchMap, timeout, pairwise } from 'rxjs/operators';
 import isReachable from 'is-reachable';
 
 import './index.css';
@@ -16,7 +16,7 @@ const getCheckReachable$ = (url, timeoutTime) => from(isReachable(url)).pipe(
 
 // cold
 const getConnectivity$ = (url, delayTime) => timer(0, delayTime).pipe(
-  switchMapTo(getCheckReachable$(url, delayTime)),
+  switchMap(() => getCheckReachable$(url, delayTime)),
   pairwise(),
   map(([last, curr]) => {
     if (!last && curr) return 'RC-reconnected';
