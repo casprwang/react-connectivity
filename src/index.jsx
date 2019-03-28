@@ -34,10 +34,10 @@ const Connectivity = ({ url = 'google.com', interval = 3000 }) => {
   const observer = n => {
     if (n === 'RC-reconnected') {
       setClassName('RC-banner RC-banner-reconnect');
-      setMsg('RC-reconnected');
+      setMsg('reconnected');
     } else if (n === 'RC-disconnected') {
       setClassName('RC-banner RC-banner-disconnect');
-      setMsg('RC-disconnected');
+      setMsg('disconnected');
     } else {
       setClassName('RC-banner');
       setMsg('');
