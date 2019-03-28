@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/wangsongiam/react-connectivity.svg?token=YfFsXUqpWyjibv8mNnVs&branch=master)](https://travis-ci.com/wangsongiam/react-connectivity)
 [![npm version](http://img.shields.io/npm/v/react-connectivity.svg?style=flat)](https://npmjs.org/package/react-connectivity "View this project on npm")
 
-A react component wrapper for connection checks.
+A react overlay component with connection checks.
 
 
 ## Motivation
