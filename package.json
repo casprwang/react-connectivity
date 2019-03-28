@@ -1,6 +1,6 @@
 {
   "name": "react-connectivity",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "wrap your components with network checks",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "lint:fix": "./node_modules/.bin/eslint --ext .js --ext .jsx src --fix",
     "prebuild": "rimraf ./lib",
     "build": "./node_modules/.bin/babel src -d lib --copy-files",
+    "prepublish": "npm run build",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook -c .storybook -o .out",
     "deploy-storybook": "npm run build-storybook &&./node_modules/.bin/surge .out react-connectivity.surge.sh",
