@@ -28,7 +28,7 @@ const getConnectivity$ = (url, delayTime) => timer(0, delayTime).pipe(
 
 const Connectivity = ({ url = 'google.com', interval = 3000 }) => {
   const [msg, setMsg] = useState('');
-  const [className, setClassName] = useState('banner');
+  const [className, setClassName] = useState('RC-banner');
 
   const connectivity$ = getConnectivity$(url, interval);
   const observer = n => {
