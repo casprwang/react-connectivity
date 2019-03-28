@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Connectivity from '../src/index.jsx';
@@ -45,15 +45,17 @@ storiesOf('offline', module)
 storiesOf('grid', module)
   .add('with basic grid layout', () => {
     let layout = [
-      {i: 'a', x: 0, y: 0, w: 3, h: 2, static: true},
+      {i: 'a', x: 0, y: 0, w: 6, h: 4, static: true},
       {i: 'b', x: 3, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
-      {i: 'c', x: 0, y: 0, w: 5, h: 2}
+      {i: 'c', x: 0, y: 2, w: 5, h: 2},
+      {i: 'd', x: 0, y: 0, w: 5, h: 2}
     ];
 
     const endpoints = [
-      'localhost',
       'google.com',
-      'non-existing-endpoint.com'
+      'localhost',
+      'non-existing-endpoint.com',
+      '8.8.8.8'
     ];
 
     layout.map((e, i) => {

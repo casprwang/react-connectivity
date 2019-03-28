@@ -10,6 +10,7 @@
     "build": "./node_modules/.bin/babel src -d lib --copy-files",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook -c .storybook -o .out",
+    "deploy-storybook": "./node_modules/.bin/surge .out react-connectivity.surge.sh",
     "test": "./node_modules/.bin/jest"
   },
   "repository": {
@@ -40,7 +41,8 @@
     "react-dom": "^16.8.4",
     "react-grid-layout": "^0.16.6",
     "rimraf": "^2.6.3",
-    "style-loader": "^0.23.1"
+    "style-loader": "^0.23.1",
+    "surge": "^0.20.3"
   },
   "dependencies": {
     "is-reachable": "^3.0.0",
