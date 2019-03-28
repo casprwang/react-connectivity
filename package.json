@@ -10,7 +10,7 @@
     "build": "./node_modules/.bin/babel src -d lib --copy-files",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook -c .storybook -o .out",
-    "deploy-storybook": "./node_modules/.bin/surge .out react-connectivity.surge.sh",
+    "deploy-storybook": "npm run build-storybook &&./node_modules/.bin/surge .out react-connectivity.surge.sh",
     "test": "./node_modules/.bin/jest"
   },
   "repository": {
